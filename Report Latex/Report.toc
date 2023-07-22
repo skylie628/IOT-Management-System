@@ -1,0 +1,21 @@
+\contentsline {section}{\numberline {1}Tìm hiểu công nghệ và MQTT Server}{3}{section.1}% 
+\contentsline {subsection}{\numberline {1.1}Công nghệ sử dụng trong mobile app}{3}{subsection.1.1}% 
+\contentsline {subsubsection}{\numberline {1.1.1}React Native là gì?}{3}{subsubsection.1.1.1}% 
+\contentsline {subsubsection}{\numberline {1.1.2}Cách hoạt động của React Native}{3}{subsubsection.1.1.2}% 
+\contentsline {subsection}{\numberline {1.2}MQTT Server}{3}{subsection.1.2}% 
+\contentsline {subsubsection}{\numberline {1.2.1}MQTT là gì?}{3}{subsubsection.1.2.1}% 
+\contentsline {subsubsection}{\numberline {1.2.2}Ưu điểm của MQTT Server}{4}{subsubsection.1.2.2}% 
+\contentsline {subsection}{\numberline {1.3}Kiến trúc giao tiếp giữa thiết bị, IoT gateway, server và ứng dụng}{5}{subsection.1.3}% 
+\contentsline {section}{\numberline {2}Mô tả use-case}{6}{section.2}% 
+\contentsline {subsection}{\numberline {2.1}Xem lịch sử đánh giá tổng quan}{7}{subsection.2.1}% 
+\contentsline {subsection}{\numberline {2.2}Đăng kí tài khoản }{8}{subsection.2.2}% 
+\contentsline {subsection}{\numberline {2.3}Xóa tài khoản}{8}{subsection.2.3}% 
+\contentsline {subsection}{\numberline {2.4}Xem danh sách tài khoản}{9}{subsection.2.4}% 
+\contentsline {subsection}{\numberline {2.5}Đăng nhập tài khoản}{9}{subsection.2.5}% 
+\contentsline {subsection}{\numberline {2.6}Đăng xuất tài khoản}{9}{subsection.2.6}% 
+\contentsline {subsection}{\numberline {2.7}Thêm bớt thiết bị điều khiển}{10}{subsection.2.7}% 
+\contentsline {subsection}{\numberline {2.8}Xem độ ẩm, nhiệt độ hiện tại}{10}{subsection.2.8}% 
+\contentsline {subsection}{\numberline {2.9}Tự điều chỉnh nhiệt độ, độ ẩm}{11}{subsection.2.9}% 
+\contentsline {subsection}{\numberline {2.10}Bật tắt thiết bị}{11}{subsection.2.10}% 
+\contentsline {subsection}{\numberline {2.11}Bật chế độ tự điều chỉnh tự động}{12}{subsection.2.11}% 
+\contentsline {section}{\numberline {3}Tài liệu tham khảo}{12}{section.3}% 

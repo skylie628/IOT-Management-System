@@ -1,0 +1,8 @@
+CREATE FUNCTION SearchLocation (@keyword VARCHAR(255),
+@location VARCHAR(255))
+RETURNS TABLE
+AS
+RETURN(
+	SELECT * FROM COMPANY 
+	WHERE (NAME LIKE @keyword) AND (ADDRESS LIKE @location)
+);

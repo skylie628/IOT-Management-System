@@ -1,0 +1,341 @@
+\section{Tìm hiểu công nghệ và MQTT Server}
+
+\subsection{Công nghệ sử dụng trong mobile app}
+\subsubsection{React Native là gì?}
+$\indent$
+\textbf{React Native} là một framework do công ty công nghệ nổi tiếng Facebook phát triển, cho phép sử dụng JavaScript để làm ứng dụng, nhằm mục đích giải quyết bài toán hiệu năng của Hybrid và bài toán chi phí khi mà phải viết nhiều loại ngôn ngữ native cho từng nền tảng di động. \\
+$\indent$
+Chúng ta sẽ build được ứng dụng Native, và chúng ta cũng có thể build ứng dụng đó một cách đa nền tảng (multi-platform) chứ không phải là một “mobile web app”, không phải là “HTML5 app”, và cũng không phải là một “hybrid app” hay cũng không chỉ build trên iOS hay Android mà chúng ta build và chạy được cả hai hệ sinh thái.\\
+$\indent$
+Một điểm hay nữa mà React Native có là giảm chi phí recompile của Native bằng cách sử dụng Hot-Loading, có nghĩa là bạn không cần phải build lại ứng dụng từ đầu nên việc chỉnh sửa diễn ra rất nhanh chóng. Giúp cho lập trình viên có thể thấy được những chỉnh sửa của họ một cách nhanh chóng trực quan, không còn phải bỏ quá nhiều thời gian trong việc build và run ứng dụng nữa.\\
+$\indent$
+Và điểm lợi hại kế tiếp của React Native đó chính là chúng ta chỉ cần sử dụng JS (JavaScript) để phát triển được một ứng dụng di động hoàn chỉnh, đồng thời giải quyết được các vấn đề mà Native App gặp phải mà mình đã nêu ở trên. Và rồi còn cả kết hợp với code native như Swift, Java, v.v… \\ \\
+\includegraphics[width=\columnwidth]{Images/reactnative}
+\subsubsection{Cách hoạt động của React Native}
+$\indent$
+Bằng cách tích hợp 2 thread là \textbf{Main Thread} và \textbf{JS Thread} cho ứng dụng mobile. 
+Với \textbf{Main Thread} sẽ đảm nhận vai trò cập nhật giao diện người dùng (UI). Sau đó sẽ xử lý tương tác người dùng. Trong khi đó, \textbf{JS Thread} sẽ thực thi và xử lý code Javascript. Hai luồng này hoạt động độc lập với nhau. \\
+$\indent$
+Để tương tác được với nhau hai Thread sẽ sử dụng một Bridge (cầu nối). Cho phép chúng giao tiếp mà không phụ thuộc lẫn nhau, chuyển đổi dữ liệu từ thread này sang thread khác. Dữ liệu từ hai Thread được vận hành khi tiếp nối dữ liệu cho nhau.
+
+\subsection{MQTT Server}
+\subsubsection{MQTT là gì?}
+$\indent$
+\textbf{MQTT (Message Queue Telemetry Transport)} là một giao thức truyền thông điệp (message) theo mô hình \textbf{Publish/Subscribe} (Xuất bản - Theo dõi), sử dụng băng thông thấp, độ tin cậy cao và có khả năng hoạt động trong điều kiện đường truyền không ổn định. \\
+Kiến trúc mức cao (high-level) của MQTT gồm 2 phần chính là \textbf{Broker và Clients}.\\
+$\indent$
+Trong đó, \textbf{Broker} được coi là trung tâm, nó là điểm giao của tất cả kết nói đến từ client. Nhiệm vụ của broker là nhận thông điệp (message) từ publisher, xếp các message theo hàng đợi rồi chuyển chúng đến một địa chỉ cụ thể. Nhiệm vụ phụ của broker là nó có thể đảm nhận thêm một vài tính năng liên quan đến quá trình truyền thông điệp như: bảo mật message, lưu trữ messages,... \\
+$\indent$
+\textbf{Client} thì được chia làm 2 nhóm là publisher và subscriber. Publisher gửi các thông điệp lên một topic cụ thể. Subscriber gửi thông điệp message yêu cầu từ topic. 
+
+\begin{figure}[tph]
+	\includegraphics[width=\columnwidth]{Images/1} \\
+	\caption{Mô hình MQTT Broker}
+	\label{fig:1}
+\end{figure}
+\subsubsection{Ưu điểm của MQTT Server}
+ MQTT mang lại nhiều lợi ích mạnh mẽ cho quy trình:\\
+$\indent$ - Chuyển thông tin hiệu quả hơn \\
+$\indent$ - Tăng khả năng mở rộng \\
+$\indent$ - Giảm đáng kể tiêu thụ băng thông mạng \\
+$\indent$ - Giảm tốc độ cập nhật xuống giây \\ 
+$\indent$ - Rất phù hợp cho các hoạt động điều khiển \\
+$\indent$ - Tối ưu hóa băng thông có sẵn \\
+$\indent$ - Chi phí thấp \\
+$\indent$ - Rất an toàn với bảo mật dựa trên sự cho phép\\
+$\indent$ - Tiết kiệm thời gian phát triển \\
+$\indent$ - Giao thức publish/subcribe thu thập dữ liệu được nhiều hơn và sử dụng ít băng thông ít hơn so với giao thức cũ. \\
+\newpage
+\subsection{Kiến trúc giao tiếp giữa thiết bị, IoT gateway, server và ứng dụng} 
+\vspace{0.5cm}
+
+\begin{figure}[tph]
+	\includegraphics[width=\columnwidth]{Images/IOT}
+	\caption{Mô hình kiến trúc hệ thống}
+	\label{fig:IOT}
+\end{figure} 
+
+$\indent$\textbf{Iot device:} cảm biến, quạt, máy lạnh được kết nối trực tiếp với internet thông qua các cổng kết nối trung gian. \\
+$\indent$\textbf{Iot gateway:} nhận data từ mạng truyền thông (Ipv4) chuyển trực tiếp thành data mà các sensor có thể hiểu được theo một giao thức nhất định (ở đây là MQTT)\\
+$\indent$\textbf{Server:} Máy chủ lưu trữ dữ liệu và chạy các thuật toán có chức năng xử lý, phân tích dữ liệu để trả về app hoặc gửi xử lý đến IOT Gateway. \\
+$\indent$\textbf{Application:} App Android có chức năng nhận diện các tương tác người dùng gửi đến server hoặc nhận dữ liệu trả về từ server hiển thị.\\
+\newpage
+\section{Mô tả use-case}
+\begin{figure}[tph]
+	\includegraphics[width=\columnwidth]{Images/Usecase} \\
+	\caption{Usecase hệ thống}
+	\label{fig:Usecase}
+\end{figure} 
+\subsection{Xem lịch sử đánh giá tổng quan}
+\begin{center}
+	\begin{tabular}{|p{4cm}|p{10cm}|}
+		\hline
+		Tên Usecase & Xem lịch sử đánh giá tổng quan\\ \hline
+		Tác nhân & Người dùng (user)\\ \hline
+		Mô tả & User xem lịch sử nhiệt độ, độ ẩm qua các ngày, xem đánh giá tổng quan \\ \hline
+		
+		Điều kiện tiên quyết & Người dùng đang ở trang chủ phần mềm \\ \hline
+		Quy trình & \begin{enumerate}
+			\item User chọn nút "Xem lịch sử" ở trang chủ
+			\item Hê thống hiện ra danh sách các ngày kèm nhiệt độ, độ ẩm trung bình của tòa nhà.
+			\item User chọn nút "Đánh giá".
+			\item Hệ thống hiện ra biểu đồ nhiệt độ, độ ẩm trung bình và đánh giá mức độ của cả tháng.
+		\end{enumerate}\\ \hline
+		Ngoại lệ & Ngoại lệ 1: tại bước 2
+		nếu không có lịch sử nhiệt độ, độ ẩm của ngày nào thì hệ thống báo "Không có lịch sử" \\ \hline
+		Quy trình thay thế & \begin{enumerate}
+			\item Quy trình thay thế 1: tại bước 2:
+			\subitem User chọn ngày trong ô tìm kiếm.
+			\subitem Hệ thống sẽ hiện thông tin lịch sử nhiệt độ, độ ẩm của ngày được chọn
+			\item Quy trình thay thế 2: tại bước 3
+			\subitem  User chọn hình thức đánh giá (theo tuần, theo tháng)
+			\subitem Hệ thống sẽ hiện thông tin lịch sử theo hình thức được lựa chọn
+			
+		\end{enumerate} \\ \hline
+		
+	\end{tabular}
+\end{center}
+\newpage
+\subsection{Đăng kí tài khoản }
+\begin{center}
+	\begin{tabular}{|p{4cm}|p{10cm}|}
+		\hline
+		Tên Usecase & Đăng kí tài khoản\\ \hline
+		Tác nhân & Admin\\ \hline
+		Mô tả & Admin đăng kí tài khoản mới cho người sử dụng
+		\\ \hline
+		Điều kiện tiên quyết & Tài khoản đang sử dụng là admin \\ \hline
+		Quy trình & \begin{enumerate}
+			\item Admin nhấn vào nút "Danh sách tài khoản".
+			\item Hệ thống hiển thị danh sách tài khoản.
+			\item Admin nhấn vào nút thêm tài khoản
+			\item Hệ thống hiện ra trang đăng kí
+			\item Điền thông tin tài khoản và mật khẩu.
+			\item Nhấn nút "Tạo tài khoản" để hoàn thành đăng kí.
+			\item Hệ thống thông báo "Đăng kí tài khoản thành công!".
+			\item Hệ thống trả về trang chủ.
+		\end{enumerate}\\ \hline
+		Ngoại lệ & \begin{enumerate}
+			\item Ngoại lệ 1 tại bước 6: Khi nhập tài khoản đã được tạo thì hệ thống báo “Tài khoản đã tồn tại”.
+			\item Ngoại lệ 2 tại bước 6: Khi nhập mật khẩu lần 2 không khớp với mật khẩu lần một thì hệ thống báo “Nhập lại mật khẩu”.
+		\end{enumerate} \\ \hline
+		Quy trình thay thế &  Không có quy trình thay thế. \\ \hline
+		
+	\end{tabular}
+\end{center}
+\subsection{Xóa tài khoản}
+\begin{center}
+	\begin{tabular}{|p{4cm}|p{10cm}|}
+		\hline
+		Tên Usecase & Xóa tài khoản\\ \hline
+		Tác nhân & Admin\\ \hline
+		Mô tả & Admin xóa tài khoản người sử dụng
+		\\ \hline
+		Điều kiện tiên quyết & Tài khoản đang sử dụng là admin \\ \hline
+		Quy trình & \begin{enumerate}
+			\item Admin nhấn vào nút "Danh sách tài khoản".
+			\item Hệ thống hiển thị danh sách tài khoản và ô tìm kiếm.
+			\item Nhập tên tài khoản vào ô tìm kiếm.
+			\item Admin nhấn vào nút “Xóa tài khoản” bên phải tên tài khoản.
+			\item Hệ thống gửi thông báo xác nhận xóa tài khoản.
+			\item Kích vào nút Delete để xóa tài khoản.
+		\end{enumerate}\\ \hline
+		Ngoại lệ & Ngoại lệ 1 tại bước 3: Tên tài khoản chưa được tạo thì hệ thống thông báo “Tài khoản không tồn tại”
+		\\ \hline
+		Quy trình thay thế &
+		Tại bước 3: Thực hiện chọn tên tài khoản có sẵn ở danh sách bên dưới ô tìm kiếm.
+		\\ \hline
+		
+	\end{tabular}
+\end{center}
+\subsection{Xem danh sách tài khoản}
+\begin{center}
+	\begin{tabular}{|p{4cm}|p{10cm}|}
+		\hline
+		Tên Usecase & Xem danh sách tài khoản.\\ \hline
+		Tác nhân & Admin\\ \hline
+		Mô tả & Admin xem danh sách các tài khoản.
+		\\ \hline
+		Điều kiện tiên quyết & Tài khoản đang sử dụng là admin \\ \hline
+		Quy trình & \begin{enumerate}
+			\item  Admin nhấp vào nút “Xem danh sách tài khoản”
+			\item Hệ thống hiện ra danh sách các tài khoản
+			
+		\end{enumerate}\\ \hline
+		Ngoại lệ & Không có ngoại lệ.\\ \hline
+		Quy trình thay thế & Không có quy trình thay thế. \\ \hline
+		
+	\end{tabular}
+\end{center}
+\subsection{Đăng nhập tài khoản}
+\begin{center}
+	\begin{tabular}{|p{4cm}|p{10cm}|}
+		\hline
+		Tên Usecase & Đăng nhập\\ \hline
+		Tác nhân & Admin, user\\ \hline
+		Mô tả & Admin hoặc người dùng thực hiện đăng nhập vào hệ thống
+		\\ \hline
+		Điều kiện tiên quyết & Không có điều kiện tiên quyết. \\ \hline
+		Quy trình & \begin{enumerate}
+			\item Người dùng nhập username, password.
+			\item Hệ thống thông báo "Đăng nhập thành công", hiển thị trang chủ.
+		\end{enumerate}\\ \hline
+		Ngoại lệ & Ngoại lệ tại bước 1: 
+		\begin{enumerate} 
+			\item Tên tài khoản hoặc mật khẩu không đúng thì hệ thông báo "Sai tên tài khoản hoặc mật khẩu". 
+			\item Hệ thống yêu cầu người dùng nhập lại user, password.
+		\end{enumerate}\\ \hline
+		Quy trình thay thế & Không có quy trình thay thế. \\ \hline
+		
+	\end{tabular}
+\end{center}
+\subsection{Đăng xuất tài khoản}
+\begin{center}
+	\begin{tabular}{|p{4cm}|p{10cm}|}
+		\hline
+		Tên Usecase & Đăng xuất\\ \hline
+		Tác nhân & Admin, user.\\ \hline
+		Mô tả & Admin hoặc người dùng thực hiện đăng xuất khỏi hệ thống.
+		\\ \hline
+		Điều kiện tiên quyết & Đã đăng nhập vào hệ thống \\ \hline
+		Quy trình & \begin{enumerate}
+			\item  Người dùng nhấn vào nút "Đăng xuất".
+			\item Hệ thống xác thực việc đăng xuất.
+			\item Sau khi nhấn OK, đăng xuất khỏi hệ thống. Hệ thống quay lại hiển thị trang đăng nhập.
+		\end{enumerate}\\ \hline
+		Ngoại lệ & Không có ngoại lệ.\\ \hline
+		Quy trình thay thế & Không có quy trình thay thế.\\ \hline
+		
+	\end{tabular}
+\end{center}
+
+\subsection{Thêm bớt thiết bị điều khiển}
+\begin{center}
+	\begin{tabular}{|p{4cm}|p{10cm}|}
+		\hline
+		Tên Usecase & Thêm bớt thiết bị\\ \hline
+		Tác nhân & User \\ \hline
+		Mô tả & Thực hiện cập nhật thêm bớt thiết bị vào hệ thống
+		\\ \hline
+		Điều kiện tiên quyết & \begin{enumerate}
+			\item Người dùng phải là user.
+		\end{enumerate} \\ \hline
+		Quy trình & \begin{enumerate}
+			\item Người dùng nhấn "Hiển thị danh sách thiết bị".
+			\item Hệ thống hiện ra giao diện chứa danh sách các thiết bị và ô tìm kiếm.
+			\item Nhấp vào nút “Add” để thêm thiết bị
+			\item Điền thông tin của thiết bị vào các ô tương ứng
+			\item Nhấn nút "OK" để thêm hoặc "Cancel" để hủy.
+			\item Màn hình trả về các danh sách thiết bị.
+		\end{enumerate}\\ \hline
+		Ngoại lệ & Không có ngoại lệ. \\ \hline
+		Quy trình thay thế & Tại bước 3:
+		\begin{enumerate}	
+			\item Nhấp chọn thiết bị hoặc tìm ID của thiết bị
+			\item Nhấp nút “Delete” và xác nhận để xóa thiết bị
+		\end{enumerate}\\ \hline
+		
+	\end{tabular}
+\end{center}
+
+\subsection{Xem độ ẩm, nhiệt độ hiện tại}
+\begin{center}
+	\begin{tabular}{|p{4cm}|p{10cm}|}
+		\hline
+		Tên Usecase & Xem độ ẩm, nhiệt độ hiện tại.\\ \hline
+		Tác nhân & User \\ \hline
+		Mô tả & Người dùng xem nhiệt độ và độ ẩm hiện tại.
+		\\ \hline
+		Điều kiện tiên quyết & Người dùng phải đăng nhập vào hệ thống. \\ \hline
+		Quy trình & Người dùng xem có chỉ số trên ở trang chủ ứng dụng. \\ \hline
+		Ngoại lệ & 
+		Nếu không có dữ liệu từ sensor thì thông báo “Không có dữ liệu”
+		\\ \hline
+		Quy trình thay thế & Không có quy trình thay thế. \\ \hline
+		
+	\end{tabular}
+\end{center}
+
+\subsection{Tự điều chỉnh nhiệt độ, độ ẩm}
+\begin{center}
+	\begin{tabular}{|p{4cm}|p{10cm}|}
+		\hline
+		Tên Usecase & Điều chỉnh thiết bị.\\ \hline
+		Tác nhân & User\\ \hline
+		Mô tả &	Tự cài đặt nhiệt độ độ ẩm cho các thiết bị hoạt động
+		\\ \hline
+		Điều kiện tiên quyết & Tài khoản đang sử dụng là user. \\ \hline
+		Quy trình & \begin{enumerate}
+			\item  Admin nhấp vào nút "Điều chỉnh thiết bị."
+			\item Hệ thống hiện ra danh sách thiết bị.
+			\item  Nhấn vào các thiết bị cần điều chỉnh.
+			\item Thay đổi các thiết bị theo nhu cầu.
+			\item Người dùng nhấn "Hiển thị danh sách thiết bị".
+			\item Hệ thống hiển thị danh sách thiết bị.
+			\item Người dùng nhấn vào nút “Điều chỉnh thiết bị”
+			\item Người dùng chọn thiết bị cần điều chỉnh
+			\item Người dùng chọn chế độ tự cài đặt
+			\item Người dùng nhập giá trị nhiệt độ và độ ẩm vào các ô tương ứng để bật tắt thiết bị.
+			\item Nhấn nút “Áp dụng” để hoàn thành cài đặt.
+			\item Hệ thống hiển thị danh sách thiết bị.
+			
+		\end{enumerate}\\ \hline
+		Ngoại lệ & Không có ngoại lệ.\\ \hline
+		Quy trình thay thế & Không có quy trình thay thế\\ \hline
+		
+	\end{tabular}
+\end{center}
+
+\subsection{Bật tắt thiết bị}
+\begin{center}
+	\begin{tabular}{|p{4cm}|p{10cm}|}
+		\hline
+		Tên Usecase & Bật tắt thiết bị\\ \hline
+		Tác nhân & User\\ \hline
+		Mô tả & Điều chỉnh chế độ bật tắt cho các thiết bị.
+		\\ \hline
+		Điều kiện tiên quyết & Tài khoản đang sử dụng là user \\ \hline
+		Quy trình & \begin{enumerate}
+			\item Hệ thống hiện ra danh sách các thiết bị.
+			\item User nhấn vào nút "Điều chỉnh thiết bị".
+			\item Chọn thiết bị cần điều chỉnh.
+			\item Điều chỉnh bật tắt thiết bị.
+		\end{enumerate} \\ \hline
+		Ngoại lệ & Không có ngoại lệ. \\ \hline
+		Quy trình thay thế & Không có quy trình thay thế. \\ \hline
+		
+	\end{tabular}
+\end{center}
+\subsection{Bật chế độ tự điều chỉnh tự động}
+\begin{center}
+	\begin{tabular}{|p{4cm}|p{10cm}|}
+		\hline
+		Tên Usecase & Bật chế độ điều chỉnh tự động\\ \hline
+		Tác nhân & User\\ \hline
+		Mô tả & Bật chế độ cho các thiết bị tự động bật tắt theo cảm biến nhiệt độ, độ ẩm
+		\\ \hline
+		Điều kiện tiên quyết & Tài khoản đang sử dụng là user \\ \hline
+		Quy trình & \begin{enumerate}
+			\item Hệ thống hiện ra danh sách các thiết bị.
+			\item Người dùng nhấn vào nút “Điều chỉnh thiết bị”
+			\item Người dùng chọn thiết bị cần điều chỉnh
+			\item Người dùng set chế độ tự động cho thiết bị.
+			\item Hệ thống xác nhận "Đã set chế độ tự động cho thiết bị".	
+		\end{enumerate} \\ \hline
+		Ngoại lệ & Không có ngoại lệ. \\ \hline
+		Quy trình thay thế & Không có quy trình thay thế. \\ \hline
+		
+	\end{tabular}
+\end{center}
+
+\section{Tài liệu tham khảo}
+\begin{enumerate}
+\item https://reactnative.dev/docs/getting-started
+\item https://topdev.vn/blog/lap-trinh-app-su-dung-react-native-so-voi-android-ios/
+\item https://vi.wikipedia.org/wiki/React\_Native
+\item https://reactguide.org/react-native/react-native-overview-and-getting-started.html
+\end{enumerate}
+\end{document}
+
+
+
